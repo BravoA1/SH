@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header className={`d-flex align-items-center ${styles.header}`}>
       <div className={`flex-fill`}>
-        <h1>Json Web Token</h1>
+        <h1>SockHub</h1>
       </div>
       <ul className={`${styles.desktopHeader}`}></ul>
     </header>
