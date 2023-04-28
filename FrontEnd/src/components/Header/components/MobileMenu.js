@@ -11,7 +11,7 @@ export default function MobileMenu() {
           </Link>
         </div>
         <div>
-          <Link to="/" className="decoNone">
+          <Link to="/search" className="decoNone">
             <button className="d-flex justify-content-center align-items-center las la-search la-2x btn-primary"></button>
           </Link>
         </div>
