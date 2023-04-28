@@ -6,18 +6,13 @@ export default function MobileMenu() {
     <div className={`card ${styles.menuContainer} `}>
       <div className="d-flex justify-content-start">
         <div>
-          <Link to="/productInformation" className="decoNone">
-            <button className="d-flex justify-content-center align-items-center las la-male la-2x btn-primary"></button>
+          <Link to="/" className="decoNone">
+            <button className="d-flex justify-content-center las la-home la-2x btn-primary"></button>
           </Link>
         </div>
         <div>
-          <Link to="/productInformation" className="decoNone">
-            <button className="las la-female la-2x d-flex justify-content-center align-items-center btn-primary"></button>
-          </Link>
-        </div>
-        <div>
-          <Link to="/productInformation" className="decoNone">
-            <button className="las la-child la-2x d-flex justify-content-center align-items-center btn-primary"></button>
+          <Link to="/" className="decoNone">
+            <button className="d-flex justify-content-center align-items-center las la-search la-2x btn-primary"></button>
           </Link>
         </div>
         <div>

@@ -57,6 +57,9 @@ export default function Header() {
               <span>Connexion</span>
             </button>
           </Link>
+          <Link to="/search">
+            <button className="btn btn-primary las la-search la-1x mr10"></button>
+          </Link>
           <Link to="/">
             <button className="btn btn-primary las la-shopping-cart la-1x mr10"></button>
           </Link>

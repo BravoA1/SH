@@ -1,4 +1,15 @@
+@use "../../assets/styles/mixins.scss" as mixin;
+
 .footer {
-  background-color: var(--gray-1);
-  color: white;
+    color: rgb(0, 0, 0);
+    background-image: url("../../assets/images/footerBackground.png");
+    background-size: contain;
+    font-size: 12px;
+    bottom: 0px;
+    background-position: 100%;
+    margin-top: 50px;
+
+    @include mixin.xxs {
+        background-repeat: no-repeat;
+    }
 }

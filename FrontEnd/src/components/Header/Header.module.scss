@@ -2,10 +2,10 @@
 
 .header {
   box-shadow: var(--box-shadow);
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   background-color: var(--primary);
   color: white;
-  height: 50px;
+  height: 80px;
   img {
     width: 200px;
     @include mixin.xs {
@@ -30,4 +30,5 @@
       display: flex;
     }
   }
+
 }
