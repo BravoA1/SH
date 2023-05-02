@@ -1,12 +1,22 @@
+@use "../../assets/styles/mixins.scss" as mixin;
+
 .header {
-  padding: 10px 20px;
   box-shadow: var(--box-shadow);
-  color: var(--primary);
-  background-color: white;
+  margin-bottom: 30px;
+  background-color: var(--primary);
+  color: white;
+  height: 80px;
   img {
-    width: 70px;
+    width: 200px;
+    @include mixin.xs {
+      width: 110px;
+    }
   }
   .desktopHeader {
+    @include mixin.xs {
+      display: none;
+    }
+    width: 100%;
   }
   i {
     font-size: 1.8rem;
@@ -16,5 +26,9 @@
     &:hover {
       opacity: 0.8;
     }
+    @include mixin.xs {
+      display: flex;
+    }
   }
+
 }

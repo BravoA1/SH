@@ -5,6 +5,12 @@ import {Suspense} from 'react';
 import {Outlet} from 'react-router-dom';
 
 function App() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <div className={`d-flex flex-column ${styles.appContainer}`}>
       <Header />
@@ -13,6 +19,10 @@ function App() {
           <Outlet/>
         </Suspense>
       </div>
+      <button
+        onClick={scrollToTop}
+        className={`btn btn-primary las la-chevron-up la-3x ${styles.buttonTop}`}
+      ></button>
       <Footer />
     </div>
   );
