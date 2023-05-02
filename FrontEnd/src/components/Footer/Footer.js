@@ -1,5 +1,4 @@
 import styles from "./Footer.module.scss";
-import backgroundSvg from "../../assets/images/footerBackground.png";
 
 export default function Footer() {
 

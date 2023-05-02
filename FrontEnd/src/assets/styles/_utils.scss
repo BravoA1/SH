@@ -107,6 +107,13 @@
   text-decoration: none;
 }
 
+a{
+  text-decoration: none;
+  &:visited{
+    color: black;
+  }
+}
+
 // .calc {
 //     position: fixed;
 //     top: 0;
