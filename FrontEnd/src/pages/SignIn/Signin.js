@@ -57,16 +57,20 @@ export default function Signin() {
 						onSubmit={submit}
 						className={`d-flex flex-column card p20 ${styles.form}`}
 					>
-						<h2 className="mb10">Connexion</h2>
-						<div className="mb10 d-flex flex-column">
-							<label htmlFor="user_mail">Email</label>
+						<h2 className="mb10 connexion">Connexion</h2>
+						<div className="mb20 d-flex flex-column">
+							<label htmlFor="user_mail" className="mb10">
+								Email
+							</label>
 							<input type="email" name="user_mail" {...register("user_mail")} />
 							{errors.user_mail && (
 								<p className="form-error">{errors.user_mail.message}</p>
 							)}
 						</div>
-						<div className="mb10 d-flex flex-column">
-							<label htmlFor="user_password">Mot de passe</label>
+						<div className="mb20 d-flex flex-column">
+							<label htmlFor="user_password" className="mb10">
+								Mot de passe
+							</label>
 							<input
 								type="password"
 								name="user_password"
@@ -79,7 +83,7 @@ export default function Signin() {
 						{errors.generic && (
 							<p className="form-error">{errors.generic.message}</p>
 						)}
-						<div>
+						<div className="d-flex justify-content-center">
 							<button disabled={isSubmitting} className="btn btn-primary">
 								Connexion
 							</button>
