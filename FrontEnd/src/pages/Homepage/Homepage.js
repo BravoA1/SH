@@ -7,9 +7,30 @@ function Homepage() {
 
   useEffect(() => {
     const response = [
-      { id: 1, price: 20, model: "mi chaussettes", brand: "KINDY" },
-      { id: 2, price: 20, model: "mi chaussettes", brand: "KINDY" },
-      { id: 3, price: 20, model: "mi chaussettes", brand: "KINDY" },
+      {
+        id: 1,
+        name : "chaussettes motif tropical",
+        price: 20,
+        model: "mi chaussettes",
+        brand: "KINDY",
+        img: "https://www.chaussettes.com/14186-large_default/mi-chaussettes-en-coton-motif-tropical-made-in-france.jpg",
+      },
+      {
+        id: 2,
+        name : "chaussettes motif tropical",
+        price: 20,
+        model: "mi chaussettes",
+        brand: "KINDY",
+        img: "https://www.chaussettes.com/14186-large_default/mi-chaussettes-en-coton-motif-tropical-made-in-france.jpg",
+      },
+      {
+        id: 3,
+        name : "chaussettes motif tropical",
+        price: 20,
+        model: "mi chaussettes",
+        brand: "KINDY",
+        img: "https://www.chaussettes.com/14186-large_default/mi-chaussettes-en-coton-motif-tropical-made-in-france.jpg",
+      },
     ];
     setProductList(response);
 
