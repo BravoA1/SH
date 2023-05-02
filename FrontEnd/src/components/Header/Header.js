@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo_sockHub.png";
 import styles from "./Header.module.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MobileMenu from "./components/MobileMenu";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Header() {
+	const { user, signout } = useContext(AuthContext);
+	console.log(user);
 	const [showMenu, setShowMenu] = useState(false);
 	const [count, setCount] = useState(0);
-	console.log(count);
 
 	function addCount() {
 		setCount(count + 1);
@@ -52,11 +54,26 @@ export default function Header() {
 					</Link>
 				</ul>
 				<ul className="flex-fill d-flex justify-content-end">
-					<Link to="/signin">
-						<button className="btn btn-primary">
-							<span>Connexion</span>
-						</button>
-					</Link>
+					{user ? (
+						<>
+							<Link to="/profile">
+								<button className="btn btn-primary">
+									<span>Profil</span>
+								</button>
+							</Link>
+							<Link to="/" onClick={() => signout()}>
+								<button className="btn btn-primary">
+									<span>Déconnexion</span>
+								</button>
+							</Link>
+						</>
+					) : (
+						<Link to="/signin">
+							<button className="btn btn-primary">
+								<span>Connexion</span>
+							</button>
+						</Link>
+					)}
 					<Link to="/search">
 						<button className="btn btn-primary las la-search la-1x mr10"></button>
 					</Link>

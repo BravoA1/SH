@@ -5,13 +5,15 @@ import ProductInformation from "./pages/ProductInformation/ProductInformation";
 import Search from "./pages/Search/Search";
 import SignUp from "./pages/SignUp/SignUp";
 import Signin from "./pages/SignIn/Signin";
-// import { userLoader } from "./loaders/userLoader";
+import { userLoader } from "./loaders/userLoader";
+import Profile from "./pages/Profile/Profile";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 export const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
-		// loader: userLoader,
+		loader: userLoader,
 		children: [
 			{
 				path: "/productInformation/:id",
@@ -32,6 +34,14 @@ export const router = createBrowserRouter([
 			{
 				path: "/signin",
 				element: <Signin />,
+			},
+			{
+				path: "/profile",
+				element: (
+					<ProtectedRoute>
+						<Profile />
+					</ProtectedRoute>
+				),
 			},
 		],
 	},

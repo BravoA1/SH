@@ -41,4 +41,33 @@ router.post("/", async (req, res) => {
 	});
 });
 
+router.get("/current", async (req, res) => {
+	const { token } = req.cookies;
+	if (token) {
+		try {
+			const decodedToken = jsonwebtoken.verify(token, keyPub, {
+				algorithms: "RS256",
+			});
+			const sqlVerify = `SELECT user_id, user_name, user_firstname FROM user WHERE user_id=${decodedToken.sub}`;
+			connection.query(sqlVerify, (err, result) => {
+				const currentUser = result[0];
+				if (currentUser) {
+					return res.send(currentUser);
+				} else {
+					res.send(JSON.stringify(null));
+				}
+			});
+		} catch (error) {
+			res.send(JSON.stringify(null));
+		}
+	} else {
+		res.send(JSON.stringify(null));
+	}
+});
+
+router.delete("/", (req, res) => {
+	res.clearCookie("token");
+	res.end();
+});
+
 module.exports = router;
