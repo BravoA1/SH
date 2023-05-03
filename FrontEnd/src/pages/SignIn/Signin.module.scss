@@ -1,0 +1,28 @@
+.form {
+	background-color: var(--primary);
+	max-width: 500px;
+	flex: 1 1 auto;
+	color: var(--light-white);
+	h2 {
+		text-align: center;
+	}
+	input {
+		border-radius: 5px;
+		border: none;
+	}
+	.forgetPassword {
+		text-decoration: underline;
+		font-weight: 900;
+		color: var(--light-white);
+		display: flex;
+		justify-content: flex-end;
+		cursor: pointer;
+	}
+	.signup {
+		color: var(--light-white);
+		cursor: pointer;
+		text-decoration: underline;
+		font-weight: 900;
+		font-size: 1.2rem;
+	}
+}

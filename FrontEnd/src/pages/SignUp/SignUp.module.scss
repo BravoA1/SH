@@ -1,0 +1,16 @@
+.ContainForm {
+	.form {
+		background-color: var(--primary);
+		max-width: 500px;
+		flex: 1 1 auto;
+		color: var(--light-white);
+	}
+	h2 {
+		text-align: center;
+		color: var(--light-white);
+	}
+	input {
+		border-radius: 5px;
+		border: none;
+	}
+}
