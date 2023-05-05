@@ -1,0 +1,58 @@
+.Container {
+  margin: 20px;
+  width: 150px;
+  &:hover {
+    .ContainerName {
+      .ImgContainer {
+        right: 15%;
+        transition: 1s all;
+        .Img {
+          background-image: url(https://img.icons8.com/windows/32/null/shopping-cart.png);
+          background-size: contain;
+          background-repeat: space;
+        }
+      }
+    }
+  }
+  .ContainerName {
+    position: relative;
+    .Name {
+      background-color: var(--secondary);
+      width: 65%;
+      border-top-right-radius: 15px;
+      z-index: 1;
+    }
+    .ImgContainer {
+      transition: 1s all;
+      background-color: var(--error-light);
+      width: 50%;
+      height: 30px;
+      border-top-right-radius: 15px;
+      right: 30%;
+      z-index: 0;
+      position: absolute;
+      .Img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .Product {
+    z-index: 1;
+    background-color: var(--secondary);
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    img {
+      margin-top: 10px;
+      max-width: 75%;
+      max-height: 75%;
+      border-radius: 5px;
+    }
+    p {
+      font-size: 1rem;
+      margin: 5px;
+    }
+  }
+}
