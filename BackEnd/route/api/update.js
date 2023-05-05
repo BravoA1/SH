@@ -2,6 +2,7 @@ const connection = require("../../database");
 const jsonwebtoken = require("jsonwebtoken");
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
 const saltRounds = 10;
 const { key, keyPub } = require("../../keys");
 
@@ -22,31 +23,31 @@ router.post("/", (req, res) => {
           }
         );
         const link = `http://localhost:8000/api/update/${result[0].user_id}/${token}`;
-        console.log(link);
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "sockhub.contact@gmail.com",
+                pass: "csgmzwokacgasnyb",
+            },
+        });
+        console.log("email :" + email);
+        console.log("link :" + link);
+        const mailOptions = {
+            from: "sockhub.contact@gmail.com",
+            to: email,
+            subject: "Sending Email using Node.js",
+            text: link,
+        };
+        
+        let info = transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Email sent: " + info.response);
+            }
+        });
+        console.log("Message sent: %s", info);
         res.send(JSON.stringify(true));
-        // const transporter = nodemailer.createTransport({
-        //   service: "gmail",
-        //   auth: {
-        //     user: "sockhub.contact@gmail.com",
-        //     pass: "SockHub1999*",
-        //   },
-        // });
-
-        // const mailOptions = {
-        //   from: "sockhub.contact@gmail.com",
-        //   to: result[0].Useremail,
-        //   subject: "Sending Email using Node.js",
-        //   text: link,
-        // };
-
-        // let info = transporter.sendMail(mailOptions, function (error, info) {
-        //   if (error) {
-        //     console.log(error);
-        //   } else {
-        //     console.log("Email sent: " + info.response);
-        //   }
-        // });
-        // console.log("Message sent: %s", info);
       } else {
         res.status(400).send(JSON.stringify("Utilisateur Inconnu"));
       }
