@@ -1,6 +1,6 @@
 import "./Search.scss";
 import SearchItem from "./components/SearchItem";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Search() {
   const [price, SetPrice] = useState(10);
@@ -12,7 +12,7 @@ export default function Search() {
   return (
     <div className="d-flex flex-fill">
       <div className={`d-flex flex-column FilterParent`}>
-        <a className={`btn-primary`}>Filtre</a>
+        <a href="/" className={`btn-primary`}>Filtre</a>
         <div className={`d-flex flex-fill flex-column Filter`} id="filter">
           <div className="price my10">
             <label>{price}</label>
