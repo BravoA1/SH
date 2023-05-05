@@ -9,6 +9,7 @@ import { userLoader } from "./loaders/userLoader";
 import Profile from "./pages/Profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Cart from "./pages/Cart/Cart";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: "/signin",
         element: <Signin />,
+      },
+      {
+        path: "/forgotpassword",
+        element: <ForgotPassword />
       },
       {
         path: "/profile",

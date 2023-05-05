@@ -15,9 +15,12 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookie());
 
 app.use(routes);
+
+app.set("view engine", "ejs");
 
 app.use(({ res }) => {
 	const message =
