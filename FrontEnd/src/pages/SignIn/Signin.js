@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import styles from "./Signin.module.scss";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -83,7 +83,7 @@ export default function Signin() {
 						{errors.generic && (
 							<p className="form-error">{errors.generic.message}</p>
 						)}
-						<Link>
+						<Link to="/forgotpassword">
 							<p className={`${styles.forgetPassword}`}>Mot de passe oublié?</p>
 						</Link>
 						<div className="d-flex justify-content-center">
