@@ -6,7 +6,6 @@ router.post("/", async (req, res) => {
   const userId = req.body.userId;
   const rating = req.body.score;
   const comment = req.body.comment.comment;
-  console.log(comment); 
   const dateComment = req.body.currentDate;
   console.log(req.body);
 

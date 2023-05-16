@@ -21,7 +21,7 @@ function ProductInformation() {
   };
 
   const yupSchema = yup.object({
-    comment:yup.string().required(false),
+    comment:yup.string().notRequired(false),
   });
 
   const defaultValues = {
