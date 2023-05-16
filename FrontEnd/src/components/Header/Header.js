@@ -37,17 +37,17 @@ export default function Header() {
       </div>
       <div className={`${styles.desktopHeader} d-flex `}>
         <ul className="d-flex flex-fill justify-content-start">
-          <Link to="search">
+          <Link to="search/man">
             <button className="btn btn-primary">
               <span>Homme</span>
             </button>
           </Link>
-          <Link to="/search">
+          <Link to="/search/woman">
             <button className="btn btn-primary">
               <span>Femme</span>
             </button>
           </Link>
-          <Link to="/search">
+          <Link to="/search/kid">
             <button className="btn btn-primary">
               <span>Enfant</span>
             </button>
