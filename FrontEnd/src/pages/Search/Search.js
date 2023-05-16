@@ -1,9 +1,24 @@
+import { useParams } from "react-router-dom";
+import { getArticles, getArticlesByGenderKid, getArticlesByGenderMan, getArticlesByGenderWoman } from "../../apis/articles";
 import "./Search.scss";
 import SearchItem from "./components/SearchItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Search() {
   const [price, SetPrice] = useState(10);
+  const [articles, setArticles] = useState(null);
+  let {gender} = useParams();
+  useEffect(()=>{
+    if(gender === "man"){
+      getArticlesByGenderMan().then(a => setArticles(a));
+    }else if (gender === "woman"){
+      getArticlesByGenderWoman().then(a => setArticles(a));
+    }else if(gender === "kid"){
+      getArticlesByGenderKid().then(a => setArticles(a));
+    }else{
+      getArticles().then(a => setArticles(a));
+    }
+  },[gender])
 
   const handleChange = () => {
     const slider = document.getElementById("price");
@@ -101,21 +116,13 @@ export default function Search() {
         </div>
       </div>
       <div className={`d-flex flex-wrap`}>
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
+        {
+          articles != null ? (
+            articles.map((article, i)=> (
+              <SearchItem key={i} article={article}/>
+            ) )
+          ) : ""
+        }
       </div>
     </div>
   );

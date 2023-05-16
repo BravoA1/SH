@@ -14,12 +14,12 @@ import {cartLoader} from './loaders/cartLoader';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "",
     element: <App />,
     loader: userLoader,
     children: [
       {
-        path: "/productInformation/:id",
+        path: "productInformation/:id",
         element: <ProductInformation />,
       },
       {
@@ -27,28 +27,34 @@ export const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: "/search",
+        path: "search",
         element: <Search />,
+        children : [
+          {
+            path: ":gender",
+            element: <Search/>
+          }
+        ]
       },
       {
-        path: "/cart",
+        path: "cart",
         element: <Cart />,
         loader: cartLoader
       },
       {
-        path: "/signup",
+        path: "signup",
         element: <SignUp />,
       },
       {
-        path: "/signin",
+        path: "signin",
         element: <Signin />,
       },
       {
-        path: "/forgotpassword",
+        path: "forgotpassword",
         element: <ForgotPassword />
       },
       {
-        path: "/profile",
+        path: "profile",
         element: (
           <ProtectedRoute>
             <Profile />
