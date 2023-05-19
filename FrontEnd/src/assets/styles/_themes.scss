@@ -8,9 +8,9 @@
 		opacity: 0.8;
 	}
 	&-primary {
-		background-color: var(--secondary);
+		background-color: #798eb2;
 		color: white;
-		border: 3px solid var(--primary);
+		border: 2px solid #e0dede;
 	}
 	&-secondary {
 		background-color: white;
@@ -29,7 +29,49 @@
 	}
 }
 
+.btnSingUp {
+	background: #dfe6ef;
+	color: #15223b;
+	&:hover {
+		background: #fff;
+	}
+}
+
+.btnLogin {
+	width: 60%;
+	height: 40px;
+	margin: 10px auto;
+	justify-content: center;
+	display: block;
+	color: #dfe6ef;
+	background: #15223b;
+	font-size: 1rem;
+	font-weight: bold;
+	margin-top: 20px;
+	border: none;
+	border-radius: 5px;
+	transition: 0.2s ease-in;
+	cursor: pointer;
+	&:hover {
+		background: #798eb2;
+	}
+}
+.labelLogin {
+	color: #15223b;
+	padding: 10px;
+	transform: scale(0.6);
+	&:hover {
+		color: #798eb2;
+		transform: scale(0.7);
+	}
+}
+
 .card {
 	border-radius: 10px;
 	background-color: white;
+}
+
+.form-error {
+	color: var(--error);
+	text-align: center;
 }
