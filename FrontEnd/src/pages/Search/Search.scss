@@ -1,32 +1,32 @@
 .FilterParent {
-  width: 25%;
+  width: 100%;
   min-width: 200px;
   transition: 0.5s;
-  &:hover {
-    transition: 0.5s;
-    width: 150%;
-    .Filter {
-      .taille {
-        .tailleContainer {
-          transition: 1s;
-          visibility: visible;
-        }
-      }
-      .couleur {
-        .couleurContainer {
-          transition: 1s;
-          visibility: visible;
-        }
-      }
-      .marque {
-        .marqueContainer {
-          transition: 1s;
-          visibility: visible;
-          flex-wrap: wrap;
-        }
-      }
-    }
-  }
+  // &:hover {
+  //   transition: 0.5s;
+  //   width: 150%;
+  //   .Filter {
+  //     .taille {
+  //       .tailleContainer {
+  //         transition: 1s;
+  //         visibility: visible;
+  //       }
+  //     }
+  //     .couleur {
+  //       .couleurContainer {
+  //         transition: 1s;
+  //         visibility: visible;
+  //       }
+  //     }
+  //     .marque {
+  //       .marqueContainer {
+  //         transition: 1s;
+  //         visibility: visible;
+  //         flex-wrap: wrap;
+  //       }
+  //     }
+  //   }
+  // }
   .Filter {
     transition: 0.5s;
     border: 3px solid var(--divider);
@@ -40,6 +40,9 @@
       }
     }
     .price {
+      .PriceLabel{
+        width: 30px;
+      }
     }
     .matiere {
     }
@@ -48,19 +51,22 @@
     .taille {
       .tailleContainer {
         display: flex;
-        visibility: hidden;
+        flex-wrap: wrap;
+        // visibility: hidden;
       }
     }
     .couleur {
       .couleurContainer {
         display: flex;
-        visibility: hidden;
+        flex-wrap: wrap;
+        // visibility: hidden;
       }
     }
     .marque {
       .marqueContainer {
         display: flex;
-        visibility: hidden;
+        flex-wrap: wrap;
+        // visibility: hidden;
       }
     }
     .promotion{
