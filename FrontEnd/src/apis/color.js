@@ -1,6 +1,6 @@
-const API_ARTICLES = "/api/size";
+const API_ARTICLES = "/api/color";
 
-export async function getSize(id) {
+export async function getColor(id) {
   const obj_id = { id }
   const response = await fetch(`${API_ARTICLES}`, {
     method: "POST",

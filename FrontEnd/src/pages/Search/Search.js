@@ -3,76 +3,82 @@ import { getArticles, getArticlesByGender } from "../../apis/articles";
 import "./Search.scss";
 import SearchItem from "./components/SearchItem";
 import { useEffect, useState } from "react";
+import { getSize } from "../../apis/size";
+import { getColor } from "../../apis/color";
+import { getMaterial } from "../../apis/material";
 // import { getSize } from "../../apis/size";
 
 export default function Search() {
   const [price, SetPrice] = useState(30);
   const [size, SetSize] = useState([]);
+  const [brand, SetBrand] = useState([]);
+  const [color, SetColor] = useState([]);
+  const [pattern, SetPattern] = useState("");
+  const [material, SetMaterial] = useState("");
   const [articles, setArticles] = useState(null);
   const [displayArticles, setDisplayArticles] = useState(null);
   let { gender } = useParams();
-
-  //Do when gender change so only when the page load
+  //On render initialise all the parameter
   useEffect(() => {
-    //Ecrase un tableau
-    function flattenArray(arr) {
-      const flattened = [];
-
-      arr.forEach((element) => {
-        if (Array.isArray(element)) {
-          flattened.push(...flattenArray(element));
-        } else {
-          flattened.push(element);
-        }
-      });
-
-      return flattened;
-    }
-
-    //Send the array back with size added
-    function GetSize(a) {
-      // eslint-disable-next-line array-callback-return
-      a.map((article) => {
-        article.size = [article.size];
-        // eslint-disable-next-line array-callback-return
-        a.map((ar, i) => {
-          if (ar === article) {
-          } else {
-            if (ar.id === article.id) {
-              article.size.push(ar.size);
-              article.size = flattenArray(article.size);
-              a.splice(i, 1);
-            }
-          }
-        });
-      });
-
-      return a;
-    }
-    //Get article with gender from param
-    if (gender === "man") {
-      getArticlesByGender("Man").then((a) => setArticles(GetSize(a)));
-    } else if (gender === "woman") {
-      getArticlesByGender("Woman").then((a) => setArticles(GetSize(a)));
-    } else if (gender === "kid") {
-      getArticlesByGender("Kid").then((a) => setArticles(GetSize(a)));
-    } else {
-      getArticles().then((a) => setArticles(a));
-    }
-  }, [gender]);
+    const selectPattern = document.getElementById("selectPattern");
+    selectPattern.selectedIndex = 0;
+    const selectMaterial = document.getElementById("selectMaterial");
+    selectMaterial.selectedIndex = 0;
+    SetPrice(30);
+    SetSize([]);
+    SetBrand([]);
+    SetColor([]);
+    SetPattern("");
+    SetMaterial("");
+  }, []);
 
   useEffect(() => {
     //Initialise the Display Article
     setDisplayArticles(articles);
+    console.log(articles);
   }, [articles]);
 
+  //Do when gender change
   useEffect(() => {
-    function CommonValue(size, article) {
-      console.log(article);
-      console.log(size);
-      const hasCommonValue = size.every((value) =>
+    //Send the array back with all the parameter needed
+    function GetParameter(a) {
+      let ArticleBuffer = a;
+      // eslint-disable-next-line array-callback-return
+      a.map(async (article, i) => {
+        const Size = await getSize(article.id);
+        const Color = await getColor(article.id);
+        const Material = await getMaterial(article.id);
+        ArticleBuffer[i].size = Size;
+        ArticleBuffer[i].color = Color;
+        ArticleBuffer[i].material = Material;
+      });
+
+      return ArticleBuffer;
+    }
+    //Get article with gender from param
+    if (gender === "man") {
+      getArticlesByGender("Man").then((a) => setArticles(GetParameter(a)));
+    } else if (gender === "woman") {
+      getArticlesByGender("Woman").then((a) => setArticles(GetParameter(a)));
+    } else if (gender === "kid") {
+      getArticlesByGender("Kid").then((a) => setArticles(GetParameter(a)));
+    } else {
+      getArticles().then((a) => setArticles(GetParameter(a)));
+    }
+  }, [gender]);
+
+  //Filter useEffect
+  useEffect(() => {
+    //Common value for int array
+    function CommonValueInt(parameter, article) {
+      const hasCommonValue = parameter.every((value) =>
         article.includes(parseInt(value))
       );
+      return hasCommonValue;
+    }
+    //Contain value for string Array
+    function ContainValueString(parameter, article) {
+      const hasCommonValue = parameter.some((value) => article.includes(value));
 
       return hasCommonValue;
     }
@@ -83,9 +89,10 @@ export default function Search() {
       filterArticle = articles.filter((a) => a.price < price);
       //Filter article with size
       if (size.length > 0) {
+        // eslint-disable-next-line array-callback-return
         filterArticle = filterArticle.filter((a) => {
           if (Array.isArray(a.size)) {
-            return CommonValue(size, a.size);
+            return CommonValueInt(size, a.size);
           } else {
             if (a.size === size) {
               return true;
@@ -93,9 +100,68 @@ export default function Search() {
           }
         });
       }
+      //Filter article with brand
+      if (brand.length > 0) {
+        // eslint-disable-next-line array-callback-return
+        filterArticle = filterArticle.filter((a) => {
+          if (Array.isArray(brand)) {
+            return ContainValueString(brand, [a.brand]);
+          } else {
+            if (a.brand === brand) {
+              return true;
+            }
+          }
+        });
+      }
+      //Filter article with pattern
+      if (pattern !== "") {
+        // eslint-disable-next-line array-callback-return
+        filterArticle = filterArticle.filter((a) => {
+          if (pattern === a.pattern) {
+            return true;
+          }
+        });
+      }
+      //Filter article with color
+      if (color.length > 0) {
+        // eslint-disable-next-line array-callback-return
+        filterArticle = filterArticle.filter((a) => {
+          if (Array.isArray(a.color)) {
+            return CommonValueInt(color, a.color);
+          } else {
+            if (a.color === color) {
+              return true;
+            }
+          }
+        });
+      }
+      //Filer article with material
+      if (material !== "") {
+        // eslint-disable-next-line array-callback-return
+        filterArticle = filterArticle.filter((a) => {
+          if (Array.isArray(a.material)) {
+            const materialArticleOrigin = a.material;
+            let materialArticle = [];
+            materialArticleOrigin.map((m) => materialArticle.push(m.material));
+            console.log(
+              material,
+              " : ",
+              materialArticle,
+              " = ",
+              material.includes(parseInt(materialArticle))
+            );
+            return material.includes(parseInt(materialArticle));
+          } else {
+            if (a.material === material) {
+              return true;
+            }
+          }
+        });
+        console.log(filterArticle);
+      }
       setDisplayArticles(filterArticle);
     }
-  }, [price, size, articles]);
+  }, [price, size, brand, color, pattern, material, articles]);
 
   //Gestion du slider
   const handleChangeSlider = () => {
@@ -103,18 +169,72 @@ export default function Search() {
     SetPrice(slider.value);
   };
 
+  //Gestion des checkbox Size
   const handleChangeCheckboxSize = () => {
     const checkboxSize = document.getElementById("size");
     const form_Data = new FormData(checkboxSize);
+    //Verifie si les checkbox existe
     if (!form_Data.has("lang[]")) {
       let size = [];
-      console.log("checkbox");
       // eslint-disable-next-line
       for (const [name, value] of form_Data) {
         size.push(value);
       }
-      console.log(size);
       SetSize(size);
+    }
+  };
+
+  //Gestion des checkbox Color
+  const handleChangeCheckboxColor = () => {
+    const checkboxBrand = document.getElementById("color");
+    const form_Data = new FormData(checkboxBrand);
+    //Verifie si les checkbox existe
+    if (!form_Data.has("lang[]")) {
+      let color = [];
+      // eslint-disable-next-line
+      for (const [name, value] of form_Data) {
+        color.push(value);
+      }
+      SetColor(color);
+    }
+  };
+
+  //Gestion des checkbox Brand
+  const handleChangeCheckboxBrand = () => {
+    const checkboxBrand = document.getElementById("brand");
+    const form_Data = new FormData(checkboxBrand);
+    //Verifie si les checkbox existe
+    if (!form_Data.has("lang[]")) {
+      let brand = [];
+      // eslint-disable-next-line
+      for (const [name, value] of form_Data) {
+        brand.push(name);
+      }
+      SetBrand(brand);
+    }
+  };
+
+  //Gestion du select Pattern
+  const handleChangeSelectPattern = () => {
+    const selectPattern = document.getElementById("selectPattern");
+    const value = selectPattern.value;
+    if (value === "reset") {
+      SetPattern("");
+      selectPattern.selectedIndex = 0;
+    } else {
+      SetPattern(value);
+    }
+  };
+
+  //Gestion du select Matterial
+  const handleChangeSelectMaterial = () => {
+    const selectMaterial = document.getElementById("selectMaterial");
+    const value = selectMaterial.value;
+    if (value === "reset") {
+      SetMaterial("");
+      selectMaterial.selectedIndex = 0;
+    } else {
+      SetMaterial(value);
     }
   };
 
@@ -140,22 +260,53 @@ export default function Search() {
             <label>Prix</label>
           </div>
           <div className="matiere my10">
-            <select>
-              <option value="">Matière</option>
-              <option value="coton">Coton</option>
-              <option value="polya">Polyamide</option>
-              <option value="laine">Laine</option>
-              <option value="poly">Polyester</option>
-            </select>
+            <form id="material" onChange={() => handleChangeSelectMaterial()}>
+              <select id="selectMaterial">
+                <option value="" disabled>
+                  Matière
+                </option>
+                <option value={1}>Coton</option>
+                <option value={2}>Polyamide</option>
+                <option value={3}>Viscose de bambou</option>
+                <option value={4}>Acrylique</option>
+                <option value={5}>Laine</option>
+                <option value={6}>Elasthanne</option>
+                <option value={7}>Polyester</option>
+                <option value={8}>Polypropylène</option>
+                <option value={"reset"}>Reset</option>
+              </select>
+            </form>
           </div>
           <div className="motif my10">
-            <select>
-              <option value="">Motif</option>
-              <option value="raye">Rayée</option>
-              <option value="bist">Bistrot</option>
-              <option value="trop">Tropical</option>
-              <option value="surf">Surfer</option>
-            </select>
+            <form id="pattern" onChange={() => handleChangeSelectPattern()}>
+              <select id="selectPattern">
+                <option value="" disabled>
+                  Motif
+                </option>
+                <option value="rayée">Rayée</option>
+                <option value="bistrot">Bistrot</option>
+                <option value="tropical">Tropical</option>
+                <option value="surfer">Surfer</option>
+                <option value="café crème">Café crème</option>
+                <option value="moustache">Moustache</option>
+                <option value="nordic">Nordic</option>
+                <option value="fantaisie">Fantaisie</option>
+                <option value="ancre">Ancre</option>
+                <option value="drapeau et baguette">Drapeau et baguette</option>
+                <option value="village">Village</option>
+                <option value="coq">Coq</option>
+                <option value="ksport">Ksport</option>
+                <option value="aucun">Aucun</option>
+                <option value="cœur">Cœur</option>
+                <option value="floral">Floral</option>
+                <option value="marin">Marin</option>
+                <option value="mum">Mum</option>
+                <option value="pingouin">Pingouin</option>
+                <option value="ski">Ski</option>
+                <option value="moto">Moto</option>
+                <option value="reset">Reset</option>
+              </select>
+            </form>
           </div>
           <div className="taille my10 d-flex flex-column">
             <form id="size" onChange={() => handleChangeCheckboxSize()}>
@@ -168,69 +319,85 @@ export default function Search() {
                 <label className="ml5">Ado</label>
                 <input type="checkbox" name="Teenager" value={7} />
                 <label className="ml5">XS</label>
-                <input type="checkbox" name="XS" value={6} />
+                <input type="checkbox" name="XS" value={1} />
                 <label className="ml5">S</label>
-                <input type="checkbox" name="S" value={5} />
+                <input type="checkbox" name="S" value={2} />
                 <label className="ml5">M</label>
-                <input type="checkbox" name="M" value={4} />
+                <input type="checkbox" name="M" value={3} />
                 <label className="ml5">L</label>
-                <input type="checkbox" name="L" value={3} />
+                <input type="checkbox" name="L" value={4} />
                 <label className="ml5">XL</label>
-                <input type="checkbox" name="XL" value={2} />
+                <input type="checkbox" name="XL" value={5} />
                 <label className="ml5">2XL</label>
-                <input type="checkbox" name="2XL" value={1} />
+                <input type="checkbox" name="2XL" value={6} />
               </div>
             </form>
           </div>
           <div className="couleur my10 d-flex flex-column">
-            <label>Couleur</label>
-            <div className="couleurContainer">
-              <label>Gris</label>
-              <input type="checkbox" />
-              <label>Noir</label>
-              <input type="checkbox" />
-              <label>Bleu</label>
-              <input type="checkbox" />
-              <label>Beige</label>
-              <input type="checkbox" />
-              <label>Noir/Bleu</label>
-              <input type="checkbox" />
-              <label>Noir/Violet</label>
-              <input type="checkbox" />
-              <label>Blanc</label>
-              <input type="checkbox" />
-              <label>Marine</label>
-              <input type="checkbox" />
-              <label>Rose</label>
-              <input type="checkbox" />
-              <label>Noir/Blanc</label>
-              <input type="checkbox" />
-              <label>Bleu/Rouge</label>
-              <input type="checkbox" />
-              <label>Rouge</label>
-              <input type="checkbox" />
-              <label>Noir/Orange</label>
-              <input type="checkbox" />
-              <label>Noir/Gris</label>
-              <input type="checkbox" />
-              <label>Marron</label>
-              <input type="checkbox" />
-            </div>
+            <form id="color" onChange={() => handleChangeCheckboxColor()}>
+              <label>Couleur</label>
+              <div className="couleurContainer">
+                <label>Gris</label>
+                <input type="checkbox" name="gris" value={1} />
+                <label>Noir</label>
+                <input type="checkbox" name="noir" value={2} />
+                <label>Bleu</label>
+                <input type="checkbox" name="bleu" value={3} />
+                <label>Beige</label>
+                <input type="checkbox" name="beige" value={4} />
+                <label>Noir/Bleu</label>
+                <input type="checkbox" name="noir/bleu" value={5} />
+                <label>Noir/Violet</label>
+                <input type="checkbox" name="noir/violet" value={6} />
+                <label>Blanc</label>
+                <input type="checkbox" name="blanc" value={7} />
+                <label>Marine</label>
+                <input type="checkbox" name="marine" value={8} />
+                <label>Rose</label>
+                <input type="checkbox" name="rose" value={9} />
+                <label>Noir/Blanc</label>
+                <input type="checkbox" name="noir/blanc" value={10} />
+                <label>Bleu/Rouge</label>
+                <input type="checkbox" name="bleu/rouge" value={11} />
+                <label>Rouge</label>
+                <input type="checkbox" name="rouge" value={12} />
+                <label>Noir/Orange</label>
+                <input type="checkbox" name="noir/orange" value={13} />
+                <label>Noir/Gris</label>
+                <input type="checkbox" name="noir/gris" value={14} />
+                <label>Marron</label>
+                <input type="checkbox" name="marron" value={15} />
+              </div>
+            </form>
           </div>
           <div className="marque my10 d-flex flex-column">
-            <label>Couleur</label>
-            <div className="marqueContainer">
-              <label className="ml5">Marque1</label>
-              <input type="checkbox" />
-              <label className="ml5">Marque1</label>
-              <input type="checkbox" />
-              <label className="ml5">Marque1</label>
-              <input type="checkbox" />
-              <label className="ml5">Marque1</label>
-              <input type="checkbox" />
-              <label className="ml5">Marque1</label>
-              <input type="checkbox" />
-            </div>
+            <form id="brand" onChange={() => handleChangeCheckboxBrand()}>
+              <label>Marque</label>
+              <div className="marqueContainer">
+                <label className="ml5">Achille</label>
+                <input type="checkbox" name="Achille" value={1} />
+                <label className="ml5">Thyo</label>
+                <input type="checkbox" name="Thyo" value={2} />
+                <label className="ml5">Kindy</label>
+                <input type="checkbox" name="Kindy" value={3} />
+                <label className="ml5">Le coq sportif</label>
+                <input type="checkbox" name="Le coq sportif" value={4} />
+                <label className="ml5">Burlington</label>
+                <input type="checkbox" name="Burlington" value={5} />
+                <label className="ml5">LBO</label>
+                <input type="checkbox" name="LBO" value={6} />
+                <label className="ml5">Levi's</label>
+                <input type="checkbox" name="Levi's" value={7} />
+                <label className="ml5">Archiduchesse</label>
+                <input type="checkbox" name="Archiduchesse" value={8} />
+                <label className="ml5">Adidas</label>
+                <input type="checkbox" name="Adidas" value={9} />
+                <label className="ml5">Lafayette</label>
+                <input type="checkbox" name="Lafayette" value={10} />
+                <label className="ml5">Nike</label>
+                <input type="checkbox" name="Nike" value={11} />
+              </div>
+            </form>
           </div>
           <div className="promotion">
             <label>Promotion</label>
