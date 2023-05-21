@@ -1,28 +1,37 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DetailProduct from "./DetailProduct/DetailProduct";
 import style from "./Cart.module.scss";
-import { useLoaderData } from "react-router-dom";
+import { getCart } from "../../apis/cart";
+import { AuthContext } from "../../context/AuthContext";
 
 function Cart() {
-  const c = useLoaderData();
-  const [cart, setCart] = useState(c);
+  const { user } = useContext(AuthContext);
+  const [cart, setCart] = useState([]);
   const [totalPrice, setPrice] = useState(0);
 
   useEffect(() => {
+    if (user != null) {
+      getCart(user.user_id).then((e) => {
+        setCart(e);
+        setTotalPrice(e);
+      });
+    }
+  }, [setPrice]);
+
+  function setTotalPrice(tab) {
     var price = 0;
-    cart.forEach((e) => {
-      price = price + e.price * e.count;
+    tab.forEach((e) => {
+      price = price + e.price * e.quantity;
     });
     setPrice(price);
-  }, [setPrice, cart]);
-
+  }
   return (
     <div className={`${style.container}`}>
       <div className={`d-flex ${style.container2}`}>
         <div className={`${style.cart}`}>
           <h2>Votre panier</h2>
           {!cart.length > 0 ? (
-            <div>Loading...</div>
+            <div>Votre panier est vide</div>
           ) : (
             cart.map((p) => (
               <div key={p.id} className={`${style.bar}`}>

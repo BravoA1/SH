@@ -38,7 +38,6 @@ export const router = createBrowserRouter([
 			{
 				path: "cart",
 				element: <Cart />,
-				loader: cartLoader,
 			},
 			{
 				path: "login",
@@ -58,4 +57,5 @@ export const router = createBrowserRouter([
 			},
 		],
 	},
+
 ]);

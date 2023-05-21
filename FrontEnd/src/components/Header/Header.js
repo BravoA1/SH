@@ -6,10 +6,9 @@ import MobileMenu from "./components/MobileMenu";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Header() {
-	const { user, signout } = useContext(AuthContext);
-	console.log(user);
-	const [showMenu, setShowMenu] = useState(false);
-	const [count, setCount] = useState(0);
+  const { user, signout } = useContext(AuthContext);
+  const [showMenu, setShowMenu] = useState(false);
+  const [count, setCount] = useState(0);
 
 	function addCount() {
 		setCount(count + 1);
