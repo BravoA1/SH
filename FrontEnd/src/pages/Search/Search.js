@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getArticles, getArticlesByGenderKid, getArticlesByGenderMan, getArticlesByGenderWoman } from "../../apis/articles";
 import "./Search.scss";
 import SearchItem from "./components/SearchItem";
@@ -118,8 +118,8 @@ export default function Search() {
       <div className={`d-flex flex-wrap`}>
         {
           articles != null ? (
-            articles.map((article, i)=> (
-              <SearchItem key={i} article={article}/>
+            articles.map((article)=> (
+              <Link key={article.id} to={`/productInformation/${article.id}`}><SearchItem article={article}/></Link>
             ) )
           ) : ""
         }

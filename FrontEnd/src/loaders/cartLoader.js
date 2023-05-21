@@ -6,11 +6,11 @@ export async function cartLoader(){
           price: 20,
           model: "mi chaussettes",
           brand: "KINDY",
-          count: 1,
+          quantity: 1,
           stock: 20,
           size: "L",
           color: "",
-          motif : "tropical",
+          pattern : "tropical",
           img: "https://www.chaussettes.com/14186-large_default/mi-chaussettes-en-coton-motif-tropical-made-in-france.jpg",
         },
         {

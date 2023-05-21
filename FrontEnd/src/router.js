@@ -10,7 +10,6 @@ import Profile from "./pages/Profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Cart from "./pages/Cart/Cart";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
-import {cartLoader} from './loaders/cartLoader'; 
 
 export const router = createBrowserRouter([
   {
@@ -39,7 +38,6 @@ export const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
-        loader: cartLoader
       },
       {
         path: "signup",
