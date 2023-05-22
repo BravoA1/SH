@@ -15,13 +15,19 @@ class Article {
       try {
         connection.query(
           //get articles from all the table and send object {name, description, datetime, price, note, brand, pattern, gender, type}
-          "SELECT a.article_name as name, a.article_description as description, a.article_datetime as datetime, a.article_price as price, a.article_note as note, b.brand_name as brand, p.pattern_name as pattern, g.gender_name as gender, t.type_name as type FROM article a INNER JOIN brand b ON b.brand_id = a.brand_id INNER JOIN pattern p ON p.pattern_id = a.pattern_id INNER JOIN gender g ON g.gender_id = a.gender_id INNER JOIN type t ON t.type_id = a.type_id",
-          (err, result) => {
+          "SELECT a.article_id as id, a.article_name as name, a.article_description as description, a.article_price as price, a.article_note as note, b.brand_name as brand, p.pattern_name as pattern, g.gender_name as gender, t.type_name as type FROM article a INNER JOIN brand b ON b.brand_id = a.brand_id INNER JOIN pattern p ON p.pattern_id = a.pattern_id INNER JOIN gender g ON g.gender_id = a.gender_id INNER JOIN type t ON t.type_id = a.type_id",
+          async (err, result) => {
             if (err) throw err;
-            //put values on articles with the result get on the db
-            this.articles = result;
-            //return all the articles
-            resolve(result);
+            await Promise.all(
+              result.map(async (article) => {
+                const img = await photo.getPhotoByArticleId(article.id);
+                this.articles.push({
+                  ...article,
+                  img: { id: img.id, urlImg: img.urlImg },
+                });
+              })
+            );
+            resolve(this.articles);
           }
         );
       } catch (error) {
