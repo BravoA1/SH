@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 21 mai 2023 à 22:57
+-- Généré le : lun. 22 mai 2023 à 08:37
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `sockhhub`
+-- Base de données : `sockhub2`
 --
 
 -- --------------------------------------------------------
@@ -667,7 +667,8 @@ CREATE TABLE `basket_article` (
 
 INSERT INTO `basket_article` (`article_id`, `basket_id`, `article_quantity`, `size_id`, `color_id`) VALUES
 (18, 10, 3, 3, 1),
-(20, 10, 2, 3, 3);
+(20, 10, 2, 3, 3),
+(39, 10, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -37047,7 +37048,7 @@ INSERT INTO `photo` (`photo_id`, `photo_url`, `photo_main`, `article_id`) VALUES
 (69, 'socquettes-en-coton-motifs-feuillage-made-in-france-rose.jpg', 1, 33),
 (70, 'socquettes-en-coton-motifs-feuillage-made-in-france-noir.jpg', 0, 33),
 (71, 'socquettes-en-coton-motifs-feuillage-made-in-france-blanc.jpg', 0, 33),
-(72, ' mi-chaussettes-en-coton-fleurs-made-in-france-marine.jpg', 1, 34),
+(72, 'mi-chaussettes-en-coton-fleurs-made-in-france-marine.jpg', 1, 34),
 (73, 'mi-chaussettes-en-coton-fleurs-made-in-france-bleu.jpg', 0, 34),
 (74, 'mi-chaussettes-en-coton-mum-made-in-france-gris.jpg', 1, 35),
 (75, 'mi-bas-ski-tricot-3d-en-laine-et-soie-haute-performance-noirbleu.jpg', 1, 36),
