@@ -9,16 +9,7 @@ export default function SearchItem({ article }) {
 	useEffect(() => {
 		// getImage(article.img.urlImg).then((e) => setImg(e.url));
 		setImg(getImage(article.img.urlImg));
-
-		if (article.name.length > 9) {
-			let name = "";
-			for (let i = 0; i < 6; i++) {
-				name = name + article.name[i];
-			}
-			setTitle(name + "...");
-		} else {
-			setTitle(article.name);
-		}
+		setTitle(article.name);
 	}, []);
 
 	return (

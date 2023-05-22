@@ -70,9 +70,7 @@ footer {
 	}
 }
 @media only screen and (max-width: 1139px) {
-	footer {
-		display: block;
-	}
+	
 	.logo {
 		margin: 20px;
 	}
@@ -84,30 +82,9 @@ footer {
 		margin: 0px;
 	}
 }
-@media only screen and (max-width: 950px) {
-	.footer .col {
-		width: 33%;
+@media only screen and (max-width: 800px) {
+	footer {
+		display: block;
 	}
-	.footer .col h1 {
-		font-size: 14px;
-	}
-	.footer .col ul li {
-		font-size: 13px;
-	}
-}
-@media only screen and (max-width: 500px) {
-	.footer .col {
-		width: 50%;
-	}
-	.footer .col h1 {
-		font-size: 14px;
-	}
-	.footer .col ul li {
-		font-size: 13px;
-	}
-}
-@media only screen and (max-width: 340px) {
-	.footer .col {
-		width: 100%;
-	}
+
 }

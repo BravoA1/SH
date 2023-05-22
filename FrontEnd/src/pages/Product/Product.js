@@ -28,7 +28,7 @@ function Product({ product }) {
         className={`${style.container} d-flex justify-content-center align-items-center`}
       >
         <img
-          src="https://www.chaussettes.com/14186-large_default/mi-chaussettes-en-coton-motif-tropical-made-in-france.jpg"
+          src={product.img}
           alt=""
         />
         <div className={`${style.information} ml10`}>

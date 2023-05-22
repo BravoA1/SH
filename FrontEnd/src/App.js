@@ -7,12 +7,6 @@ import AuthProvider from "./components/AuthProvider/AuthProvider";
 import UpdateProvider from "./components/UpdateProvider/UpdateProvider";
 
 function App() {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
   return (
     <div className={`d-flex flex-column ${styles.appContainer}`}>
       <AuthProvider>
@@ -23,10 +17,6 @@ function App() {
               <Outlet />
             </Suspense>
           </div>
-          <button
-            onClick={scrollToTop}
-            className={`btn btn-primary las la-chevron-up la-3x ${styles.buttonTop}`}
-          ></button>
           <Footer />
         </UpdateProvider>
       </AuthProvider>

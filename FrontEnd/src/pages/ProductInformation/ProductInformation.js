@@ -23,6 +23,7 @@ function ProductInformation() {
   useEffect(() => {
     getArticleById(id).then(async (p) => {
       setProduct(p);
+      console.log(p)
       setColorId(p.color[0].id);
       setSizeId(p.size[0].id);
       p.img.map(async (e, i) => {
