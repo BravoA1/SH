@@ -1,107 +1,108 @@
 .imgAvatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-  cursor: pointer;
-  &:hover{
-    transform: scale(1.2);
-    border: 1px solid var(--primary);
-  }
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	cursor: pointer;
+	&:hover {
+		transform: scale(1.2);
+		border: 1px solid #15223b;
+	}
 }
 .imgCentral {
-  width: 400px;
-  height: 400px;
-  border-radius: 40px;
+	width: 400px;
+	height: 400px;
+	border-radius: 40px;
 }
 
 .straight {
-  background-color: var(--primary);
-  border-radius: 5px;
+	background-color: #15223b;
+	border-radius: 5px;
 }
 
 .svertical {
-  width: 10px;
-  height: 320px;
+	width: 10px;
+	height: 320px;
 }
 
 .shorizontal {
-  width: 80px;
-  height: 10px;
+	width: 80px;
+	height: 10px;
 }
 
 .btnColor {
-  width: 30px;
-  height: 30px;
+	width: 30px;
+	height: 30px;
 }
 
-.black{
-  background-color: black;
-  height: 100%;
-  width : 50%;
+.black {
+	background-color: black;
+	height: 100%;
+	width: 50%;
 }
-.gray{
-  background-color: gray;
-  height: 100%;
-  width : 50%;
+.gray {
+	background-color: gray;
+	height: 100%;
+	width: 50%;
 }
-.blue{
-  background-color: blue;
-  height: 100%;
-  width : 50%;
+.blue {
+	background-color: blue;
+	height: 100%;
+	width: 50%;
 }
-.beige{
-  background-color: beige;
-  height: 100%;
-  width : 50%;
+.beige {
+	background-color: beige;
+	height: 100%;
+	width: 50%;
 }
-.purple{
-  background-color: purple;
-  height: 100%;
-  width : 50%;
+.purple {
+	background-color: purple;
+	height: 100%;
+	width: 50%;
 }
-.white{
-  background-color: white;
-  height: 100%;
-  width : 50%;
+.white {
+	background-color: white;
+	height: 100%;
+	width: 50%;
 }
-.navy{
-  background-color: navy;
-  height: 100%;
-  width : 50%;
+.navy {
+	background-color: navy;
+	height: 100%;
+	width: 50%;
 }
-.pink{
-  background-color: pink;
-  height: 100%;
-  width : 50%;
+.pink {
+	background-color: pink;
+	height: 100%;
+	width: 50%;
 }
-.red{
-  background-color: red;
-  height: 100%;
-  width : 50%;
+.red {
+	background-color: red;
+	height: 100%;
+	width: 50%;
 }
-.orange{
-  background-color: orange;
-  height: 100%;
-  width : 50%;
+.orange {
+	background-color: orange;
+	height: 100%;
+	width: 50%;
 }
-.brown{
-  background-color: brown;
-  height: 100%;
-  width : 50%;
-}
-
-.color{
-  cursor: pointer;
-  height: 40px;
-  width: 40px;
-  border: 1px solid black;
+.brown {
+	background-color: brown;
+	height: 100%;
+	width: 50%;
 }
 
-.active{
-  border-color: var(--primary);
-  border-style: double;border-width: 6px;
+.color {
+	cursor: pointer;
+	height: 40px;
+	width: 40px;
+	border: 1px solid black;
 }
 
-.danger{
-  color: red;
+.active {
+	border-color: var(--primary);
+	border-style: double;
+	border-width: 6px;
+}
+
+.danger {
+	color: red;
 }

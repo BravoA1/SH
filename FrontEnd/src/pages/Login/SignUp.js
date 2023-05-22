@@ -72,7 +72,7 @@ export default function SignUp({ handleClick, loginActive }) {
 			}
 		>
 			<form onSubmit={submit}>
-				<label onClick={handleClick}>Sign Up</label>
+				<label onClick={handleClick}>Inscription</label>
 
 				<input
 					type="text"
