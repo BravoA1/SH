@@ -15,6 +15,20 @@ export async function getArticles(){
     }
 }
 
+export async function getArticleById(id){
+    const response = await fetch(`${API_ARTICLES}/getArticleById?id=${id}`);
+    const backResponse = await response.json();
+    if(response.ok){
+        return backResponse;
+    }else{
+        if(backResponse){
+            throw backResponse;
+        }else{
+            throw new Error('API error');
+        }
+    }
+}
+
 export async function getArticlesByGender(gender){
     const response = await fetch(`${API_ARTICLES}/getArticlesByGender${gender}`);
     const backResponse = await response.json();
