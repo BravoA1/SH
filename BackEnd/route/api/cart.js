@@ -3,7 +3,9 @@ const Cart = require("../../database/model/cart.model");
 
 router.post("/addArticle", async (req, res) => {
   const { idUser, idArticle, idSize, idColor } = req.body;
+  console.log(idUser, " : ", idArticle, " : ", idSize, " : ", idColor);
   const cart = new Cart();
+  console.log("cart ", cart);
   res.json(await cart.addArticleToCart(idUser, idArticle, idSize, idColor));
 });
 

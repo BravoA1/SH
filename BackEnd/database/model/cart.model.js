@@ -39,11 +39,12 @@ class Cart {
 
   addArticleToCart(idUser, idArticle, idSize, idColor) {
     return new Promise(async (resolve, reject) => {
+      console.log("Verify");
       var idCart = await this.verifyUserHaveCart(idUser);
       if (idCart === 0) {
+        console.log("idCart = 0");
         idCart = await this.createCartForUser(idUser);
       }
-
       if (!(await this.verifyArticleExistInCart(idArticle, idCart))) {
         if (await this.addArticle(idArticle, idCart, idSize, idColor, 1)) {
           resolve("Article bien ajouter au panier");
@@ -79,7 +80,6 @@ class Cart {
   updateQuantityArticle(idUser, idArticle, quantity) {
     return new Promise(async (resolve, reject) => {
       var idCart = await this.verifyUserHaveCart(idUser);
-      console.log(idCart, idArticle, quantity);
       try {
         connection.query(
           "UPDATE basket_article SET article_quantity = ? WHERE article_id = ? AND basket_id = ?",
@@ -100,6 +100,7 @@ class Cart {
   }
 
   verifyUserHaveCart(idUser) {
+    console.log(idUser);
     return new Promise((resolve, reject) => {
       try {
         connection.query(
@@ -107,7 +108,7 @@ class Cart {
           [idUser],
           (err, result) => {
             if (err) throw err;
-            if (result.length >= 0) {
+            if (result.length > 0) {
               resolve(result[0].id);
             } else {
               resolve(0);

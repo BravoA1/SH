@@ -40,6 +40,7 @@ function ProductInformation() {
         );
       });
     });
+    console.log(stocks);
   }, []);
 
   const validationSchema = yup.object({

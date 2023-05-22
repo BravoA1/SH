@@ -66,7 +66,23 @@ class Article {
     return new Promise((resolve, reject) => {
       try {
         connection.query(
-          `SELECT a.article_name as name, a.article_description as description, a.article_datetime as datetime, a.article_price as price, a.article_note as note, b.brand_name as brand, p.pattern_name as pattern, g.gender_name as gender, t.type_name as type FROM article a INNER JOIN brand b ON b.brand_id = a.brand_id INNER JOIN pattern p ON p.pattern_id = a.pattern_id INNER JOIN gender g ON g.gender_id = a.gender_id INNER JOIN type t ON t.type_id = a.type_id WHERE g.gender_name = '${this.gender}'`,
+          `SELECT a.article_id as id, a.article_name as name, a.article_description as description, a.article_price as price, a.article_note as note, b.brand_name as brand, p.pattern_name as pattern, g.gender_name as gender, t.type_name as type FROM article a INNER JOIN brand b ON b.brand_id = a.brand_id INNER JOIN pattern p ON p.pattern_id = a.pattern_id INNER JOIN gender g ON g.gender_id = a.gender_id INNER JOIN type t ON t.type_id = a.type_id WHERE a.article_id = '${id}'`,
+          (err, result) => {
+            if (err) throw err;
+            this.article = result[0];
+          }
+        );
+        connection.query(
+          "SELECT asi.size_id as id, article_id as idArticle, size_name as name, size_size as size FROM article_size asi INNER JOIN size s ON s.size_id = asi.size_id WHERE asi.article_id = ?",
+          [id],
+          (err, result) => {
+            if (err) throw err;
+            this.article = { ...this.article, size: result };
+          }
+        );
+        connection.query(
+          "SELECT stock_id as id, stock_quantity as quantity, color_id as colorId, size_id as sizeId FROM stock WHERE article_id = ?",
+          [id],
           (err, result) => {
             if (err) throw err;
             this.article = { ...this.article, stock: result };
