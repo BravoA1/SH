@@ -13,7 +13,7 @@ function DetailProduct({ product, setPrice, price, setCart, cart }) {
   const [img, setImg] = useState("");
 
   useEffect(() => {
-    getImage(product.img.urlImg).then((e) => setImg(e.url));
+    setImg(getImage(product.img.urlImg));
   }, []);
 
   async function minus() {

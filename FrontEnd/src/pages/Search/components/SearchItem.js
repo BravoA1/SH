@@ -7,7 +7,8 @@ export default function SearchItem({ article }) {
 	const [title, setTitle] = useState("");
 
 	useEffect(() => {
-		getImage(article.img.urlImg).then((e) => setImg(e.url));
+		// getImage(article.img.urlImg).then((e) => setImg(e.url));
+		setImg(getImage(article.img.urlImg));
 
 		if (article.name.length > 9) {
 			let name = "";

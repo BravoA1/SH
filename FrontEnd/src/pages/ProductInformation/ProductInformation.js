@@ -4,7 +4,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthContext } from "../../context/AuthContext";
 import { useParams } from "react-router-dom";
-import { createComment } from "../../apis/score";
 import { getArticleById } from "../../apis/articles";
 import { useContext, useEffect, useState } from "react";
 import { addArticleToCart } from "../../apis/cart";
@@ -24,15 +23,14 @@ function ProductInformation() {
   useEffect(() => {
     getArticleById(id).then(async (p) => {
       setProduct(p);
-      console.log(p);
       setColorId(p.color[0].id);
       setSizeId(p.size[0].id);
       p.img.map(async (e, i) => {
-        const img = await getImage(e.urlImg);
+        const img = getImage(e.urlImg);
         if (i === 0) {
-          setImgPrincipal(img.url);
+          setImgPrincipal(img);
         }
-        setImgs((imgs) => [...imgs, img.url]);
+        setImgs((imgs) => [...imgs, img]);
         setStocks(
           p.stock.filter(
             (e) => e.sizeId === p.size[0].id && e.colorId === p.color[0].id
