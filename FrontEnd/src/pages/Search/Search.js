@@ -405,12 +405,12 @@ export default function Search() {
           </div>
         </div>
       </div>
-      <div className={`d-flex flex-wrap`}>
+      <div className={`d-flex flex-wrap containerSearch`}>
         {displayArticles != null
           ? displayArticles.map((article, i) => (
-            <Link key={article.id} to={`/productInformation/${article.id}`}>
-              <SearchItem key={i} article={article} />
-            </Link>
+              <Link key={article.id} to={`/productInformation/${article.id}`}>
+                <SearchItem key={i} article={article} />
+              </Link>
             ))
           : ""}
       </div>

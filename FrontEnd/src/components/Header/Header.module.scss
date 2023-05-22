@@ -5,6 +5,15 @@
 	background-color: #15223b;
 	color: white;
 	height: 80px;
+	.button {
+		height: max-content;
+		width: fit-content;
+		color: #fff;
+		padding: 30px 20px;
+		&:hover {
+			background-color: #23395d;
+		}
+	}
 	img {
 		width: 200px;
 		@include mixin.xs {

@@ -1,80 +1,82 @@
 .FilterParent {
-  width: 100%;
-  min-width: 200px;
-  transition: 0.5s;
-  // &:hover {
-  //   transition: 0.5s;
-  //   width: 150%;
-  //   .Filter {
-  //     .taille {
-  //       .tailleContainer {
-  //         transition: 1s;
-  //         visibility: visible;
-  //       }
-  //     }
-  //     .couleur {
-  //       .couleurContainer {
-  //         transition: 1s;
-  //         visibility: visible;
-  //       }
-  //     }
-  //     .marque {
-  //       .marqueContainer {
-  //         transition: 1s;
-  //         visibility: visible;
-  //         flex-wrap: wrap;
-  //       }
-  //     }
-  //   }
-  // }
-  .Filter {
-    transition: 0.5s;
-    border: 3px solid var(--divider);
-    width: 100%;
-    div {
-      display: flex;
-      align-items: center;
-      label {
-        font-size: 1rem;
-        color: var(--text-color);
-      }
-    }
-    .price {
-      .PriceLabel{
-        width: 30px;
-      }
-    }
-    .matiere {
-    }
-    .motif {
-    }
-    .taille {
-      .tailleContainer {
-        display: flex;
-        flex-wrap: wrap;
-        // visibility: hidden;
-      }
-    }
-    .couleur {
-      .couleurContainer {
-        display: flex;
-        flex-wrap: wrap;
-        // visibility: hidden;
-      }
-    }
-    .marque {
-      .marqueContainer {
-        display: flex;
-        flex-wrap: wrap;
-        // visibility: hidden;
-      }
-    }
-    .promotion{
-      display: flex;
-    }
-  }
+	width: 100%;
+	min-width: 200px;
+	transition: 0.5s;
+	// &:hover {
+	//   transition: 0.5s;
+	//   width: 150%;
+	//   .Filter {
+	//     .taille {
+	//       .tailleContainer {
+	//         transition: 1s;
+	//         visibility: visible;
+	//       }
+	//     }
+	//     .couleur {
+	//       .couleurContainer {
+	//         transition: 1s;
+	//         visibility: visible;
+	//       }
+	//     }
+	//     .marque {
+	//       .marqueContainer {
+	//         transition: 1s;
+	//         visibility: visible;
+	//         flex-wrap: wrap;
+	//       }
+	//     }
+	//   }
+	// }
+	.Filter {
+		transition: 0.5s;
+		border: 3px solid var(--divider);
+		width: 100%;
+		div {
+			display: flex;
+			align-items: center;
+			label {
+				font-size: 1rem;
+				color: var(--text-color);
+			}
+		}
+		.price {
+			.PriceLabel {
+				width: 30px;
+			}
+		}
+
+		.taille {
+			.tailleContainer {
+				display: flex;
+				flex-wrap: wrap;
+				// visibility: hidden;
+			}
+		}
+		.couleur {
+			.couleurContainer {
+				display: flex;
+				flex-wrap: wrap;
+				// visibility: hidden;
+			}
+		}
+		.marque {
+			.marqueContainer {
+				display: flex;
+				flex-wrap: wrap;
+				// visibility: hidden;
+			}
+		}
+		.promotion {
+			display: flex;
+		}
+	}
 }
 
 select {
-  width: 80%;
+	width: 80%;
+}
+
+.containerSearch {
+	margin: 0 10px;
+	background: #dfe6ef;
 }

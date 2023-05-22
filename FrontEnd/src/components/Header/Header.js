@@ -6,9 +6,10 @@ import MobileMenu from "./components/MobileMenu";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Header() {
-  const { user, signout } = useContext(AuthContext);
-  const [showMenu, setShowMenu] = useState(false);
-  const [count, setCount] = useState(0);
+	const { user, signout } = useContext(AuthContext);
+	console.log(user);
+	const [showMenu, setShowMenu] = useState(false);
+	const [count, setCount] = useState(0);
 
 	function addCount() {
 		setCount(count + 1);
@@ -27,7 +28,7 @@ export default function Header() {
 	return (
 		<header className={`d-flex align-items-center ${styles.header}`}>
 			<div className={``}>
-				<div className="d-flex justify-content-start">
+				<div className={`${styles.button}d-flex justify-content-star`}>
 					<Link to="/">
 						{" "}
 						<img src={logo} alt="Logo" />
@@ -35,49 +36,48 @@ export default function Header() {
 				</div>
 			</div>
 			<div className={`${styles.desktopHeader} d-flex `}>
-				<ul className="d-flex flex-fill justify-content-start mr10">
-					<Link to="search/man">
-						<button className="btn btn-primary mr10">
+				<ul className="d-flex flex-fill justify-content-start">
+					<Link to="search">
+						<div className={`${styles.button}`}>
 							<span>Homme</span>
-						</button>
+						</div>
 					</Link>
-					<Link to="/search/woman">
-						<button className="btn btn-primary mr10">
+					<Link to="/search">
+						<div className={`${styles.button}`}>
 							<span>Femme</span>
-						</button>
+						</div>
 					</Link>
-					<Link to="/search/kid">
-						<button className="btn btn-primary mr10">
+					<Link to="/search">
+						<div className={`${styles.button}`}>
 							<span>Enfant</span>
-						</button>
+						</div>
 					</Link>
 				</ul>
 				<ul className="flex-fill d-flex justify-content-end">
 					{user ? (
 						<>
 							<Link to="/profile">
-								<button className="btn btn-primary mr10">
+								<div className={`${styles.button}`}>
 									<span>Profil</span>
-								</button>
+								</div>
 							</Link>
 							<Link to="/" onClick={() => signout()}>
-								<button className="btn btn-primary mr10">
+								<div className={`${styles.button}`}>
 									<span>Déconnexion</span>
-								</button>
+								</div>
 							</Link>
 						</>
 					) : (
 						<Link to="/login">
-							<button className="btn btn-primary mr10">
+							<div className={`${styles.button}`}>
 								<span>Connexion</span>
-							</button>
+							</div>
 						</Link>
 					)}
-					<Link to="/search">
-						<button className="btn btn-primary las la-search la-1x mr10"></button>
-					</Link>
 					<Link to="/cart">
-						<button className="btn btn-primary las la-shopping-cart la-1x mr10"></button>
+						<div className={`${styles.button} las la-shopping-cart la-1x mr10`}>
+							{" "}
+						</div>
 					</Link>
 				</ul>
 			</div>
